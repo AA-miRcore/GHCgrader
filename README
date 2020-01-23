@@ -1,0 +1,78 @@
+###############################################################################
+GENES AND HEALTH CONTEST GRADER
+
+Jae Chan Hwang | hwangjc@umich.edu
+01/23/2020
+###############################################################################
+
+
+requires:
+	
+	- python 3.6 or above
+
+
+usage: GHCgrader.py [-h] [-w WRITEMAX] [-c COMPMAX] [-b BEGDST] [-a ADVDST]
+                    [-A ADVPATH] [-G] -s SIGNIN
+                    grades
+
+Finds the winners of the Genes and Health contest.
+
+positional arguments:
+  grades                The path to the grades sheet in CSV format.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w WRITEMAX, --writemax WRITEMAX
+                        The total number of possible points in the written
+                        portion of the test. Default is 100.
+  -c COMPMAX, --compmax COMPMAX
+                        The total number of possible points in the
+                        computational portion of the test. Default is 100.
+  -b BEGDST, --begdst BEGDST
+                        The distribution of points allocated towards the
+                        written portion and the computational portion of the
+                        test for the beginner section. Default is 50/50.
+  -a ADVDST, --advdst ADVDST
+                        The distrivution of points allocated towards the
+                        written portion and the computational portion of the
+                        test for the advanced section. Default is 40/60.
+  -A ADVPATH, --advpath ADVPATH
+                        The path to the score sheet for the advanced section.
+                        If this argument is not specified, it will grade
+                        everything as the beginner section using the beginner
+                        section distribution. Cannot have both -A and -G
+                        options.
+  -G, --gradesplit      Flag indicating that the competitors will be split
+                        into different groups based on their grade -
+                        underclassmen and upperclassmen. The beginner
+                        distribution will be used for both groups. Cannot have
+                        both -A and -G options.
+  -s SIGNIN, --signin SIGNIN
+                        The path to the sign-in sheet in CSV format.
+
+examples:
+
+	Running beginner and advanced section:
+		
+		$ ./GHCgrader.py -A adv_scoresheet.csv -s signinsheet.csv beg_scoresheet.csv
+
+	Running beginner and advanced with custom distributions (40/60 for beginner,
+	and 30/70 for advanced):
+		
+		$ ./GHCgrader.py -b 40/60 -a 30/70 -A adv_scoresheet.csv -s signinsheet.csv beg_scoresheet.csv
+
+	Running for underclassmen / upperclassment split:
+
+		$ ./GHCgrader.py -G -s signinsheet.csv scoresheet.csv
+
+
+notes:
+
+	The sign in sheet must currently have the following columns in the following order:
+
+		Timestamp,Email Address,First Name,Last Name,School,Grade,Location
+
+	The grade sheets must currently have the following columns in the following order:
+	
+		Email Address,First Name,Last Name,Grade,Written Score,Computational Score
+
